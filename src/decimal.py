@@ -9,3 +9,6 @@ class Decimal:
         if self.base == 10 and self.convert_to == 2:
             print (bin(self.num)[2:])
 
+    def decimal_to_octal(self):
+        if self.base == 10 and self.convert_to == 8:
+            print (oct(self.num)[2:])
