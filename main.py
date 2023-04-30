@@ -9,6 +9,7 @@ def main():
     decimal.decimal_to_binary()
     decimal.decimal_to_octal()
     decimal.decimal_to_hex()
+    decimal.decimal_to_x()
 
 if __name__ == "__main__":
     main()
