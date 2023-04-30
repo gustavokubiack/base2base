@@ -8,6 +8,7 @@ def main():
     decimal = Decimal(num, base, convert_to)
     decimal.decimal_to_binary()
     decimal.decimal_to_octal()
+    decimal.decimal_to_hex()
 
 if __name__ == "__main__":
     main()
