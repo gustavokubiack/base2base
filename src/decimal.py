@@ -5,16 +5,13 @@ class Decimal:
         self.convert_to = convert_to
 
     def decimal_to_binary(self):
-        if self.base == 10 and self.convert_to == 2:
-            return bin(self.num)[2:]
+        return bin(self.num)[2:]
 
     def decimal_to_octal(self):
-        if self.base == 10 and self.convert_to == 8:
-            return oct(self.num)[2:]
+        return oct(self.num)[2:]
 
     def decimal_to_hex(self):
-        if self.base == 10 and self.convert_to == 16:
-            return hex(self.num)[2:]
+        return hex(self.num)[2:]
 
     def decimal_to_x(self):
         digits = []

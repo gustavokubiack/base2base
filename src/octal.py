@@ -5,10 +5,10 @@ class Octal:
         self.convert_to = convert_to
 
     def octal_to_binary(self):
-        if self.base == 8 and self.convert_to == 2:
-            return bin(int(str(self.num), 8))[2:]
+        return bin(int(str(self.num), 8))[2:]
 
     def octal_to_decimal(self):
-        if self.base == 8 and self.convert_to == 10:
-            return oct(self.num)[:2]    
-            
+        return oct(self.num)[:2]
+
+    def octal_to_hex(self):
+        return hex(int(str(self.num), 8))[2:]

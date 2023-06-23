@@ -1,31 +1,47 @@
 from src.decimal import Decimal
 from src.octal import Octal
-
-num = int(input("Insira um número: "))
-base = int(input("Insira a base do número: "))
-convert_to = int(input("Insira a base para conversão: "))
+from src.binary import Binary
 
 
-def main():
-    decimal = Decimal(num, base, convert_to)
-    octal = Octal(num, base, convert_to)
-    """
-    if convert_to == 2:
-        print(decimal.decimal_to_binary())
-    elif convert_to == 8:
-        print(decimal.decimal_to_octal())
-    elif convert_to == 16:
-        print(decimal.decimal_to_hex())
-    else:
-        print(decimal.decimal_to_x())"""
+class Calculator:
+    def __init__(self):
+        self.num = None
+        self.base = None
+        self.convert_to = None
 
-    if base == 8 and convert_to == 10:
-        print(octal.octal_to_decimal())
-    elif base == 8 and convert_to == 2:
-        print(octal.octal_to_binary())
-    elif base == 8 and convert_to == 16:
-        print(octal.octal_to_hex()())
+    def get_num(self):
+        self.num = int(input("Insira um número: "))
+        self.base = int(input("Insira a base do número: "))
+        self.convert_to = int(input("Insira a base para conversão: "))
+        return self.num, self.base, self.convert_to
+
+    def calculate(self):
+        conversions = {
+            (2, 10): Binary(self.num, self.base, self.convert_to).binary_to_decimal,
+            (2, 8): Binary(self.num, self.base, self.convert_to).binary_to_octal,
+            (2, 16): lambda: Binary(self.num, self.base, self.convert_to)
+            .binary_to_hex()
+            .upper(),
+            (10, 2): Decimal(self.num, self.base, self.convert_to).decimal_to_binary,
+            (10, 8): Decimal(self.num, self.base, self.convert_to).decimal_to_octal,
+            (10, 16): lambda: Decimal(self.num, self.base, self.convert_to)
+            .decimal_to_hex()
+            .upper(),
+            (8, 2): Octal(self.num, self.base, self.convert_to).octal_to_binary,
+            (8, 10): Octal(self.num, self.base, self.convert_to).octal_to_decimal,
+            (8, 16): lambda: Octal(self.num, self.base, self.convert_to)
+            .octal_to_hex()
+            .upper(),
+        }
+
+        conversion_key = (self.base, self.convert_to)
+        if conversion_key in conversions:
+            conversion_method = conversions[conversion_key]
+            return conversion_method()
+        else:
+            return "Conversão não suportada para as bases fornecidas."
 
 
-if __name__ == "__main__":
-    main()
+calculador = Calculator()
+calculador.get_num()
+print(calculador.calculate())
