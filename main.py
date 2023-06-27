@@ -1,6 +1,7 @@
 from src.decimal import Decimal
 from src.octal import Octal
 from src.binary import Binary
+from src.hexadecimal import Hexadecimal
 
 
 class Calculator:
@@ -10,8 +11,11 @@ class Calculator:
         self.convert_to = None
 
     def get_num(self):
-        self.num = int(input("Insira um número: "))
         self.base = int(input("Insira a base do número: "))
+        if self.base == 16:
+            self.num = input("Insira um número: ")
+        else:
+            self.num = int(input("Insira um número: "))
         self.convert_to = int(input("Insira a base para conversão: "))
         return self.num, self.base, self.convert_to
 
@@ -32,6 +36,9 @@ class Calculator:
             (8, 16): lambda: Octal(self.num, self.base, self.convert_to)
             .octal_to_hex()
             .upper(),
+            (16, 2): Hexadecimal(self.num, self.base, self.convert_to).hex_to_binary,
+            (16, 8): Hexadecimal(self.num, self.base, self.convert_to).hex_to_octal,
+            (16, 10): Hexadecimal(self.num, self.base, self.convert_to).hex_to_decimal,
         }
 
         conversion_key = (self.base, self.convert_to)
